@@ -1,0 +1,245 @@
+<template>
+  <view class="container">
+    <ScrollView :style="{flex: 1}">
+      <Card
+        flex
+        image="https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png"
+        title="{item.user.name}"
+        caption="{item.user.bio}"
+        authorTitle="{item.user.username}"
+        authorSubTitle="{item.user.updated_at}"
+        :on-press="() => showAlert(e)"
+      >
+      </Card>
+      <flat-list
+        :data="contents"
+        :render-item="(item) => renderList(item)"
+        :onEndReachedThreshold="1.0"
+      />
+      <activity-indicator
+        size="large"
+        :style="{marginTop: 10}"
+        v-if="loading"
+        :color="theme.COLORS.VUE"
+        animated
+      />
+      <button
+        v-if="!loading"
+        :on-press="() => getData(page)"
+        title="Load More"
+        color="#42b983"
+        :style="{borderRadius: '20px'}"
+        accessibility-label="Load more photos"
+      />
+    </ScrollView>
+  </view>
+</template>
+
+<script>
+import {DeckSwiper, Block} from 'galio-framework';
+import {View, Text, StyleSheet, Image, Button} from 'react-native';
+import {List, Card, Caption, Paragraph} from 'react-native-paper';
+import React from 'react';
+import theme from '../theme';
+import axios from 'axios';
+export default {
+  props: {
+    navigation: {type: Object},
+  },
+  components: {
+    DeckSwiper,
+    Block,
+    Card,
+  },
+  data() {
+    return {
+      theme,
+      styles: StyleSheet.create({
+        social: {
+          width: theme.SIZES.BASE * 15.5,
+          height: theme.SIZES.BASE * 3.5,
+          borderRadius: 10,
+          justifyContent: 'center',
+        },
+        container: {
+          paddingTop: 3,
+          flex: 1,
+          backgroundColor: '#fff',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+        },
+      }),
+      page: 1,
+      contents: [
+        {
+          id: '4WoyTPMYb_E',
+          created_at: '2021-10-27T14:54:01-04:00',
+          updated_at: '2021-10-30T05:30:34-04:00',
+          promoted_at: '2021-10-28T06:24:01-04:00',
+          width: 4480,
+          height: 6720,
+          color: '#f3f3f3',
+          blur_hash: 'LYI4;OI9Ditl_NIn9F%MIpaKRjxt',
+          description: null,
+          alt_description: null,
+          urls: {
+            raw:
+              'https://images.unsplash.com/photo-1635360381874-edd74cbd57f3?ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA&ixlib=rb-1.2.1',
+            full:
+              'https://images.unsplash.com/photo-1635360381874-edd74cbd57f3?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA&ixlib=rb-1.2.1&q=85',
+            regular:
+              'https://images.unsplash.com/photo-1635360381874-edd74cbd57f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA&ixlib=rb-1.2.1&q=80&w=1080',
+            small:
+              'https://images.unsplash.com/photo-1635360381874-edd74cbd57f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA&ixlib=rb-1.2.1&q=80&w=400',
+            thumb:
+              'https://images.unsplash.com/photo-1635360381874-edd74cbd57f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA&ixlib=rb-1.2.1&q=80&w=200',
+          },
+          links: {
+            self: 'https://api.unsplash.com/photos/4WoyTPMYb_E',
+            html: 'https://unsplash.com/photos/4WoyTPMYb_E',
+            download:
+              'https://unsplash.com/photos/4WoyTPMYb_E/download?ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA',
+            download_location:
+              'https://api.unsplash.com/photos/4WoyTPMYb_E/download?ixid=MnwxMjA3fDB8MXx0b3BpY3x8YWV1NnJMLWo2ZXd8fHx8fDJ8fDE2MzU2MTY0MzA',
+          },
+          categories: [],
+          likes: 12,
+          liked_by_user: false,
+          current_user_collections: [],
+          sponsorship: null,
+          topic_submissions: {
+            'business-work': {
+              status: 'approved',
+              approved_on: '2021-10-29T05:18:58-04:00',
+            },
+          },
+          user: {
+            id: '1Ii2-3J-e_o',
+            updated_at: '2021-10-30T12:54:51-04:00',
+            username: 'jakobowens1',
+            name: 'Jakob Owens',
+            first_name: 'Jakob',
+            last_name: 'Owens',
+            twitter_username: 'jakobOwenss',
+            portfolio_url: 'http://www.directorjakobowens.com',
+            bio:
+              'Filmmaker and Photographer: LA/PHX - Instagram: @JakobOwens\r\nLightroom Presets available here: http://bit.ly/2nzXy7z',
+            location: null,
+            links: {
+              self: 'https://api.unsplash.com/users/jakobowens1',
+              html: 'https://unsplash.com/@jakobowens1',
+              photos: 'https://api.unsplash.com/users/jakobowens1/photos',
+              likes: 'https://api.unsplash.com/users/jakobowens1/likes',
+              portfolio: 'https://api.unsplash.com/users/jakobowens1/portfolio',
+              following: 'https://api.unsplash.com/users/jakobowens1/following',
+              followers: 'https://api.unsplash.com/users/jakobowens1/followers',
+            },
+            profile_image: {
+              small:
+                'https://images.unsplash.com/profile-1489915140304-be21c5eb4986?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32',
+              medium:
+                'https://images.unsplash.com/profile-1489915140304-be21c5eb4986?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64',
+              large:
+                'https://images.unsplash.com/profile-1489915140304-be21c5eb4986?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128',
+            },
+            instagram_username: 'jakobowens',
+            total_collections: 2,
+            total_likes: 443,
+            total_photos: 1089,
+            accepted_tos: true,
+            for_hire: true,
+            social: {
+              instagram_username: 'jakobowens',
+              portfolio_url: 'http://www.directorjakobowens.com',
+              twitter_username: 'jakobOwenss',
+              paypal_email: null,
+            },
+          },
+        },
+      ],
+      loading: false,
+      hasNext: true,
+    };
+  },
+  mounted() {
+    // this.getData(this.page);
+  },
+  methods: {
+    goToHomeScreen() {
+      this.navigation.navigate('Home');
+    },
+    showProfile(user) {
+      console.log(`navigation to ${user.name}`);
+      this.navigation.navigate('Profile', {
+        id: user.id,
+        user: user,
+      });
+    },
+    renderList({item}) {
+      return (
+        <Card
+          key={item.id}
+          neutral
+          borderless
+          style={{marginBottom: 2}}
+          image={item.urls.thumb}
+          avatar={item.user.profile_image.small}
+          title={item.user.name}
+          caption={item.user.bio}
+          authorTitle={item.user.username}
+          authorSubTitle={item.user.updated_at}>
+          <Button
+            onPress={() => this.showProfile(item.user)}
+            title="Show Profile"
+            color="#42b983"
+            style={{borderRadius: '20px'}}
+            accessibility-label="Load more photos"
+          />
+        </Card>
+      );
+    },
+    showAlert(e) {
+      Alert.alert(
+        'Alert Title',
+        'My Alert Msg',
+        [
+          {
+            text: 'Ask me later',
+            onPress: () => console.log('Ask me later pressed'),
+          },
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        {cancelable: false},
+      );
+    },
+    async getData(page = 1) {
+      return;
+      if (!this.hasNext || this.loading) return;
+      this.loading = true;
+      console.log('Fetching content >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+      const res = await axios.post(theme.api, {
+        target: `${theme.url}/photos?per_page=12&page=${page}`,
+      });
+      if (page > 1) this.contents.push(...res.data);
+      else this.contents = res.data;
+      if (res.data.length < 12) this.hasNext = false;
+      this.page += 1;
+      this.loading = false;
+    },
+  },
+};
+</script>
+
+<style>
+.container {
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  flex-direction: row;
+}
+</style>

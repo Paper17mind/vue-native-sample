@@ -1,0 +1,184 @@
+<template>
+  <view>
+    <Block safe :style="{backgroundColor: theme.COLORS.WHITE}">
+      <!-- <KeyboardAvoidingView :style="styles.container" behavior="height" enabled> -->
+      <Block
+        flex
+        center
+        :style="{
+          marginTop: theme.SIZES.BASE * 1.875,
+          marginBottom: height * 0.1,
+        }"
+      >
+        <Text
+          muted
+          center
+          :size="theme.SIZES.FONT * 0.875"
+          :style="{paddingHorizontal: theme.SIZES.BASE * 2.3}"
+        >
+          This is the perfect place to write a short description of this step
+          and even the next steps ahead
+        </Text>
+        <Block
+          row
+          center
+          space="between"
+          :style="{
+            marginVertical: theme.SIZES.BASE * 1.875,
+            paddingHorizontal: theme.SIZES.BASE * 2.3,
+          }"
+        >
+          <Block flex middle right>
+            <GButton
+              round
+              onlyIcon
+              :iconSize="theme.SIZES.BASE * 1.625"
+              icon="facebook"
+              iconFamily="FontAwesome"
+              :color="theme.COLORS.FACEBOOK"
+              :shadowColor="theme.COLORS.FACEBOOK"
+              :iconColor="theme.COLORS.WHITE"
+              :style="styles.social"
+              :on-press="changeRoute"
+            />
+          </Block>
+          <Block flex middle center>
+            <GButton
+              round
+              onlyIcon
+              :iconSize="theme.SIZES.BASE * 1.625"
+              icon="outbox"
+              iconFamily="FontAwesome"
+              :color="theme.COLORS.TWITTER"
+              :shadowColor="theme.COLORS.TWITTER"
+              :iconColor="theme.COLORS.WHITE"
+              :style="styles.social"
+            />
+          </Block>
+          <Block flex middle left>
+            <GButton
+              round
+              onlyIcon
+              :iconSize="theme.SIZES.BASE * 1.625"
+              icon="outbox"
+              iconFamily="FontAwesome"
+              :color="theme.COLORS.DRIBBBLE"
+              :shadowColor="theme.COLORS.DRIBBBLE"
+              :iconColor="theme.COLORS.WHITE"
+              :style="styles.social"
+            />
+          </Block>
+        </Block>
+        <Text muted center :size="theme.SIZES.FONT * 0.875">
+          or be classical
+        </Text>
+      </Block>
+      <Block :flex="2" center space="evenly">
+        <Block :style="{marginVertical: theme.SIZES.BASE * 35.3}">
+          <text-input
+            :style="{
+              height: 40,
+              width: 100,
+              borderColor: 'gray',
+              borderWidth: 1,
+            }"
+            v-model="text"
+          />
+          <Input
+            rounded
+            password
+            viewPass
+            placeholder="Password"
+            :style="{width: width * 0.9}"
+          />
+          <Text
+            :color="theme.COLORS.ERROR"
+            :size="theme.SIZES.FONT * 0.75"
+            :style="{alignSelf: 'flex-end', lineHeight: theme.SIZES.FONT * 2}"
+          >
+            Forgot your password?
+          </Text>
+        </Block>
+        <Block flex middle>
+          <button
+            :on-press="changeRoute"
+            title="Learn More"
+            color="#841584"
+            accessibility-label="Learn more about this purple button"
+          />
+          <button
+            title="Learn More"
+            color="#841584"
+            accessibility-label="Learn more about this purple button"
+          />
+        </Block>
+      </Block>
+      <!-- </KeyboardAvoidingView> -->
+    </Block>
+    <!-- <activity-indicator size="large" color="#0000ff" /> -->
+  </view>
+</template>
+
+<script>
+import {Block, Button, Input, NavBar, Text} from 'galio-framework';
+import theme from '../theme';
+import {
+  StyleSheet,
+  Platform,
+  Dimensions,
+  KeyboardAvoidingView,
+} from 'react-native';
+import * as React from 'react';
+const {height, width} = Dimensions.get('window');
+export default {
+  props: {
+    navigation: {type: Object},
+  },
+  components: {
+    Block,
+    Input,
+    NavBar,
+    GButton: Button,
+    Text,
+    KeyboardAvoidingView,
+  },
+  data() {
+    return {
+      text: '',
+      theme,
+      height,
+      width,
+      styles: StyleSheet.create({
+        container: {
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          paddingTop: theme.SIZES.BASE * 0.3,
+          paddingHorizontal: theme.SIZES.BASE,
+          backgroundColor: theme.COLORS.WHITE,
+        },
+        social: {
+          width: theme.SIZES.BASE * 3.5,
+          height: theme.SIZES.BASE * 3.5,
+          borderRadius: theme.SIZES.BASE * 1.75,
+          justifyContent: 'center',
+        },
+      }),
+    };
+  },
+  methods: {
+    changeRoute() {
+      this.navigation.navigate('Details');
+    },
+  },
+};
+</script>
+
+<style>
+.container {
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-direction: row;
+}
+</style>
